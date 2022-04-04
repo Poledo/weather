@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  height: 50vh;
+
+  background-color: #fff;
+  width: 400px;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.top-section {
+  flex-grow:1;
+  padding: 30px 10px;
+}
+
+.top-section .title {
+  font-size:20px;
+  color: #40e0d0;
+}
+
+.top-section .header {
+  color: #008080;
+  font-size:32px;
+}
+
+.middle-section {
+  flex-grow:2;
+  padding: 30px 10px;
+}
+
+.bottom-section {
+  flex-grow:1;
+  padding: 30px 10px;
+}
+
+.bottom-section button {
+  width: 100%;
+}

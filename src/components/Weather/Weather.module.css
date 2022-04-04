@@ -1,0 +1,122 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  height:50vh;
+
+  color: white;
+  background: linear-gradient(145deg, #2193b0, #6dd5ed);
+  width: 400px;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+}
+
+.top-section .row {
+  margin-bottom: 5px;
+  display: flex;
+  padding: 30px 10px;
+}
+
+.top-section .item {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.top-section .item .label {
+  font-weight: bold;
+}
+
+.temperature {
+  font-size: 50px;
+  font-weight: lighter;
+  line-height: 1;
+  position: relative;
+}
+
+.temperature::after {
+  content: '°C';
+  position: absolute;
+  font-size: 15px;
+}
+
+.city-name {
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.weather-state {
+  font-size: 13px;
+}
+
+.weather-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.bottom-section {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  font-size: 13px;
+  text-align:center;
+}
+
+.bottom-section .row {
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.bottom-section .item {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.bottom-section .item .label {
+  font-weight: bold;
+}
+
+.humidity {
+  flex-grow: 1;
+}
+
+.temperature-max-min {
+  flex-grow: 1;
+}
+
+.temperature-max {
+  font-weight: lighter;
+  line-height: 1;
+  position: relative;
+}
+
+.temperature-max::after {
+  content: '°C';
+  position: absolute;
+  font-size: 13px;
+}
+
+.temperature-min {
+  font-weight: lighter;
+  line-height: 1;
+  position: relative;
+}
+
+.temperature-min::after {
+  content: '°C';
+  position: absolute;
+  font-size: 13px;
+}
+
+.win-speed {
+  flex-grow: 1;
+}
