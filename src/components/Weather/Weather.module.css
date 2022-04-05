@@ -4,25 +4,46 @@
 }
 
 .container {
-  height:50vh;
-
   color: white;
   background: linear-gradient(145deg, #2193b0, #6dd5ed);
-  width: 400px;
+  max-width: 500px;
   font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  flex-grow: 1;
+  background-size: cover;
 }
 
 .top-section {
   display: flex;
   flex-direction: column;
-  height: 80%;
+  height:40vh;
+}
+
+.top-section .search-bar {
+  display: flex;
+
+  margin: 0 auto;
+  padding-top: 20px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.city {
+  border: 0;
+  outline: 0;
+  padding: 3px 3px 3px 20px;
+  background: transparent;
+  height: 20px;
+  color: white;
 }
 
 .top-section .row {
   margin-bottom: 5px;
   display: flex;
-  padding: 30px 10px;
+  padding: 0px 20px 20px;
 }
 
 .top-section .item {
@@ -31,12 +52,20 @@
   flex: 1;
 }
 
+.top-section .item-right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: end;
+  align-items: end;
+}
+
 .top-section .item .label {
   font-weight: bold;
 }
 
 .temperature {
-  font-size: 50px;
+  font-size: 60px;
   font-weight: lighter;
   line-height: 1;
   position: relative;
@@ -58,16 +87,17 @@
 }
 
 .weather-icon {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 }
 
 .bottom-section {
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
-  font-size: 13px;
+  font-size: 14px;
   text-align:center;
+  color:black;
 }
 
 .bottom-section .row {
@@ -81,12 +111,16 @@
   flex: 1;
 }
 
-.bottom-section .item .label {
-  font-weight: bold;
-}
 
 .humidity {
   flex-grow: 1;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.humidity::after {
+  content: '%';
+  font-weight: 100;
 }
 
 .temperature-max-min {
@@ -94,29 +128,31 @@
 }
 
 .temperature-max {
-  font-weight: lighter;
   line-height: 1;
-  position: relative;
+  font-weight: bold;
 }
 
 .temperature-max::after {
   content: '°C';
-  position: absolute;
-  font-size: 13px;
+  font-weight: 100;
 }
 
 .temperature-min {
-  font-weight: lighter;
   line-height: 1;
-  position: relative;
+  font-weight: 500;
 }
 
 .temperature-min::after {
   content: '°C';
-  position: absolute;
-  font-size: 13px;
+  font-weight: 100;
 }
 
 .win-speed {
   flex-grow: 1;
+  line-height: 1;
+  font-weight: bold;
+}
+.win-speed::after {
+  content: 'km/h';
+  font-weight: 100;
 }

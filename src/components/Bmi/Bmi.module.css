@@ -4,20 +4,19 @@
 }
 
 .container {
-  height: 50vh;
-
   background-color: #fff;
-  width: 400px;
+  max-width: 500px;
   font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 .top-section {
   flex-grow:1;
-  padding: 30px 10px;
+  padding: 30px 20px;
 }
 
 .top-section .title {
@@ -31,15 +30,33 @@
 }
 
 .middle-section {
-  flex-grow:2;
-  padding: 30px 10px;
+  flex-grow:1;
+  padding: 0px 20px;
 }
 
 .bottom-section {
   flex-grow:1;
-  padding: 30px 10px;
+  padding: 30px 20px;
 }
 
 .bottom-section button {
   width: 100%;
+
+  background: #008080;
+  padding: 10px 30px;
+  border-radius: 10px;
+  outline: none;
+  color: #fff;
+  font-weight: 600;
+  border-style: none;
+  cursor: pointer;
+}
+
+.height-title {
+  display: inline-flex;
+}
+
+.height {
+  float: right;
+  display: inline-flex;
 }
