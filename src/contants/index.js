@@ -1,0 +1,1 @@
+export const OPENWEATHERMAP_APID = 'd5b31b61ba42ab3b7e12c2f24a5c1520'

@@ -7,13 +7,18 @@ import moment from 'moment'
 import AirIcon from '@mui/icons-material/Air'
 import ThermostatIcon from '@mui/icons-material/Thermostat'
 import OpacityIcon from '@mui/icons-material/Opacity'
+// import Clock from '../Clock'
 
 const DEFAULT_VALUE = '--'
+var globalDate
 function Weather() {
   const [city, setCity] = useState('')
   const [weatherData, setWeatherData] = useState([])
   const [imgName, setImgName] = useState('weather')
   const cityRef = useRef()
+  const [timesString, setTimesString] = useState()
+  const [time, setTime] = useState()
+  const intervalRef = useRef()
 
   useEffect(() => {
     getWeather('ho chi minh')
@@ -25,38 +30,68 @@ function Weather() {
       })
   }, [])
 
+  const addSeconds = (date) => {
+    globalDate = null
+    intervalRef.current = setInterval(() => {
+      let t = globalDate ?? date
+
+      let d = new Date(moment(t).add(1, 'seconds'))
+      globalDate = d
+      // console.log(globalDate)
+
+      setTimesString(moment(globalDate).format('HH:mm:ss'))
+      // setTime(d)
+    }, 1000)
+  }
+
+  const convertTimezone = (date, timezone) => {
+    let timeZoneFromDB = timezone / 3600
+    let tzDifference = timeZoneFromDB * 60 + date.getTimezoneOffset()
+    let offsetTime = new Date(date.getTime() + tzDifference * 60 * 1000)
+    return offsetTime
+  }
+
   useEffect(() => {
     if (weatherData.main) {
       let targetTime = new Date()
-      let timeZoneFromDB = +weatherData.timezone / 3600
-      let tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset()
-      let offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000)
-      let hour = moment(
-        offsetTime.getHours() + ':' + offsetTime.getMinutes(),
-        'HH:mm'
+      let offsetTime = convertTimezone(targetTime, +weatherData.timezone)
+
+      clearInterval(intervalRef.current)
+      addSeconds(offsetTime)
+
+      let hour = moment(offsetTime).format('HH:mm')
+
+      let sunriseTime = convertTimezone(
+        new Date(moment.unix(weatherData.sys.sunrise)),
+        +weatherData.timezone
+      )
+      let sunsetTime = convertTimezone(
+        new Date(moment.unix(weatherData.sys.sunset)),
+        +weatherData.timezone
       )
 
-      let sunrise = moment(
-        moment.unix(weatherData.sys.sunrise).format('HH:mm'),
-        'HH:mm'
-      )
-      let sunset = moment(
-        moment.unix(weatherData.sys.sunset).format('HH:mm'),
-        'HH:mm'
-      )
+      let sunrise = moment(sunriseTime).format('HH:mm')
+      let sunset = moment(sunsetTime).format('HH:mm')
 
-      // console.log(
-      //   'Giờ hiện tại: ',
-      //   hour,
-      //   'Giờ MT mọc: ',
-      //   sunrise,
-      //   'Giờ MT lặn: ',
-      //   sunset
-      // )
-      if (hour.isAfter(sunrise) && hour.isBefore(sunset)) {
+      console.log(
+        'Giờ hiện tại:',
+        hour,
+        'Giờ MT mọc:',
+        sunrise,
+        'Giờ MT lặn:',
+        sunset
+      )
+      if (
+        moment(hour, 'HH:mm').isAfter(moment(sunrise, 'HH:mm')) &&
+        moment(hour, 'HH:mm').isBefore(moment(sunset, 'HH:mm'))
+      ) {
         setImgName('weather')
       } else {
         setImgName('weather-dark')
+      }
+
+      return () => {
+        clearInterval(intervalRef.current)
       }
     }
   }, [weatherData])
@@ -75,6 +110,8 @@ function Weather() {
         })
         .catch((error) => {
           setWeatherData([])
+          setTimesString('')
+          // setTime(null)
         })
     }
   }
@@ -108,6 +145,7 @@ function Weather() {
                 <p className={styles['city-name']}>
                   {weatherData.name || DEFAULT_VALUE}
                 </p>
+                <p className={styles['time-string']}>{timesString}</p>
               </div>
               <div className={styles.item}>
                 <div className={styles['item-right']}>
@@ -124,6 +162,10 @@ function Weather() {
                   </p>
                 </div>
               </div>
+            </div>
+            <div className={styles['row-times']}>
+              {/* <p>{timesString}</p> */}
+              {/* <Clock time={time} /> */}
             </div>
           </div>
 
