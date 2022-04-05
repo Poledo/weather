@@ -27,14 +27,36 @@ function Weather() {
 
   useEffect(() => {
     if (weatherData.main) {
-      let hour = new Date().getHours()
-      let sunrise = +moment.unix(weatherData.sys.sunrise).format('H')
-      let sunset = +moment.unix(weatherData.sys.sunset).format('H')
+      let targetTime = new Date()
+      let timeZoneFromDB = +weatherData.timezone / 3600
+      let tzDifference = timeZoneFromDB * 60 + targetTime.getTimezoneOffset()
+      let offsetTime = new Date(targetTime.getTime() + tzDifference * 60 * 1000)
+      let hour = moment(
+        offsetTime.getHours() + ':' + offsetTime.getMinutes(),
+        'HH:mm'
+      )
 
-      if (hour < sunrise && hour > sunset) {
-        setImgName('weather-dark')
-      } else {
+      let sunrise = moment(
+        moment.unix(weatherData.sys.sunrise).format('HH:mm'),
+        'HH:mm'
+      )
+      let sunset = moment(
+        moment.unix(weatherData.sys.sunset).format('HH:mm'),
+        'HH:mm'
+      )
+
+      // console.log(
+      //   'Giờ hiện tại: ',
+      //   hour,
+      //   'Giờ MT mọc: ',
+      //   sunrise,
+      //   'Giờ MT lặn: ',
+      //   sunset
+      // )
+      if (hour.isAfter(sunrise) && hour.isBefore(sunset)) {
         setImgName('weather')
+      } else {
+        setImgName('weather-dark')
       }
     }
   }, [weatherData])
