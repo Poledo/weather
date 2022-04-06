@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { OPENWEATHERMAP_APID } from '../contants/index'
+import { OPENWEATHERMAP_APID } from '../constants/index'
 
 export const getWeather = (city) =>
   axios.get(

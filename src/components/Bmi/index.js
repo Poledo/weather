@@ -4,8 +4,6 @@ import styles from './Bmi.module.css'
 import Box from '@mui/material/Box'
 import Slider from '@mui/material/Slider'
 import { Grid, Typography } from '@mui/material'
-import { Route } from 'react-router-dom'
-import BmiResult from '../../pages/BmiResult'
 
 function Bmi() {
   const [valueHeight, setValueHeight] = useState(170)

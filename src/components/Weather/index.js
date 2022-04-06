@@ -17,7 +17,7 @@ function Weather() {
   const [imgName, setImgName] = useState('weather')
   const cityRef = useRef()
   const [timesString, setTimesString] = useState()
-  const [time, setTime] = useState()
+  // const [time, setTime] = useState()
   const intervalRef = useRef()
 
   useEffect(() => {
